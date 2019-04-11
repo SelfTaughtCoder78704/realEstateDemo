@@ -1,0 +1,44 @@
+<% include partials/header %>
+
+<div id="dashboard">
+
+    <div id="subProp">
+        <h2>Add A New Property:</h2>
+        <form action="/dashboard" method="POST">
+            <select name="propType" id="propType">
+                <option value="House Rental">House Rental</option>
+                <option value="Commerical Rental">Commerical Rental</option>
+                <option value="House for Sale">House for Sale</option>
+                <option value="Commerical Buildings for Sale">Commerical Buildings for Sale</option>
+            </select>
+            <input type="text" placeholder="street address"id='streetAdr' name='streetAdr'>
+            <input type="text" placeholder="city" name="city" id="city">
+            <input type="text" placeholder="state" name="state" id="state">
+            <input type="text" placeholder="zip code" name="zip" id="zip">
+            <input type="number" placeholder="bedrooms"id='bedrooms' name='bedrooms'>
+            <input type="number" placeholder="bathrooms"id='bathrooms' name='bathrooms'>
+            <input type="number" placeholder="square footage" name="squareFootage" id="squareFootage">
+            <input type="text" placeholder="price" name="price" id="price">
+            <input type="text" placeholder="agent name" id="agentName" name="agentName">
+            <input type="text" placeholder="phone number" id="phone" name="phone">
+            <input type="email" placeholder="contact email" id="email" name="email"> 
+            <textarea name="" id="" cols="30" rows="10" placeholder="description"></textarea>
+            <button>Submit</button>
+        </form>    
+    </div>
+    <div id="currentProps">
+        <h2>Your Current Properties:</h2>
+        <% properties.forEach(prop=> { %>
+            <div class="listed">
+                <p>Property Type: <%= prop.propertyType %></p>
+                <a href="/dashboard/<%= prop._id %>"><%= prop.streetAdr %></a>
+            </div>
+        <%  }) %>
+    </div>
+   
+</div>
+
+
+
+
+<% include partials/footer %>

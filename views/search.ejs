@@ -1,0 +1,37 @@
+<% include partials/header %>
+
+
+<div id="propSearch">
+    <h1>Find properties by zip-code:</h1>
+    <form action="/search" method="GET" >
+        <input type="text" id="searchBox" placeholder="Enter Zip Code" name="searchBox">
+        <button id="searchBtn">Submit</button>
+    </form>
+</div>
+
+
+<div id="found">
+    <h2>Properties:</h2>
+    <div id="noMatch">
+        <% if(noMatch !== undefined){ %>
+            <h3><%= noMatch %></h3>
+        <% } %>
+    </div>
+    <div id="foundPs">
+        
+            <% property.forEach(prop => { %>
+            
+                <div>
+                    <a href="/property/<%= prop._id %>">
+                    <p><%= prop.city %></p>
+                    <p><%= prop.state %></p>
+                    <p><%= prop.propertyType %></p>
+                    </a>
+                </div> 
+            
+            <% }) %>
+        
+    </div> 
+</div>
+
+<% include partials/footer %>

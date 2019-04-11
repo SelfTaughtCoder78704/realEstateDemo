@@ -1,0 +1,22 @@
+<% include partials/header %>
+
+<h1>Generic RealEstate.com</h1>
+<h2>We have the properties!</h2>
+<div id="homePageDiv">
+ 
+        <% properties.forEach(prop=> { %>
+        <div>
+            <p><strong><%= prop.propertyType %></strong></p>
+            <p><%= prop.streetAdr %></p>
+            <p><%= prop.city %></p>
+            <% if(prop.bedrooms || prop.bathrooms){ %>
+                <p><%= prop.bedrooms %>Beds/<%= prop.bathrooms %>Baths</p>
+            <% } %>
+            <p><%= prop.price %></p>
+            <a href="/property/<%= prop._id %>">Check it out</a>
+        </div>
+        <%  }) %>
+    
+</div>
+
+<% include partials/footer %>
