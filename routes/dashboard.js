@@ -2,6 +2,37 @@ const express = require('express')
 const router = express.Router()
 const Property = require('../models/property-model')
 const mongoose = require('mongoose');
+const multer = require('multer')
+
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null, './uploads/')
+    },
+    filename: function(req, file, cb){
+        cb(null, file.originalname)
+    }
+})
+
+const fileFilter = (req, file, cb) => {
+    
+    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
+    //accept
+    cb(null, true)
+    }
+    //reject a file
+    cb(null, false)
+    
+}
+
+const upload = multer({
+    storage: storage,
+     limits: {
+        fileSize: 1024 * 1024 * 5
+    },
+    fileFilter: fileFilter
+
+})
 
 const db = mongoose.connection;
 
@@ -14,7 +45,8 @@ router.get('/', (req, res) => {
 })
 
 //Houses for sale
-router.post('/', (req, res) => {
+router.post('/', upload.single('picture'),  (req, res, next) => {
+    
     const property = new Property({
         streetAdr: req.body.streetAdr,
         state: req.body.state.toUpperCase(),
@@ -28,7 +60,8 @@ router.post('/', (req, res) => {
         price: req.body.price,
         squareFootage: req.body.squareFootage,
         bedrooms: req.body.bedrooms,
-        bathrooms: req.body.bathrooms
+        bathrooms: req.body.bathrooms,
+        picture: req.file.path
     })
     property.save()
         .then(prop => {
