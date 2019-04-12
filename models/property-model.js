@@ -50,6 +50,14 @@ const propertySchema = new Schema({
     bathrooms: {
         type: Number,
         required: false
+    },
+    picture: {
+        type: String,
+        required: false
+    },
+    phone: {
+        type: String,
+        required: false
     }
 })
 
