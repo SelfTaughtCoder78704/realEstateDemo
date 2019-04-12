@@ -1,31 +1,32 @@
 <% include partials/header %>
 
 
-<div id="propSearch">
+<div id="propSearch" class="jumbotron text-center">
     <h1>Find properties by zip-code:</h1>
-    <form action="/search" method="GET" >
-        <input type="text" id="searchBox" placeholder="Enter Zip Code" name="searchBox">
-        <button id="searchBtn">Submit</button>
+    <form class="form-group" action="/search" method="GET" >
+        <input class="form-control" type="text" id="searchBox" placeholder="Enter Zip Code" name="searchBox">
+        <button class="btn btn-success" id="searchBtn">Submit</button>
     </form>
 </div>
 
 
-<div id="found">
+<div id="found" class="container">
     <h2>Properties:</h2>
-    <div id="noMatch">
+    <div id="noMatch" class="text-center">
         <% if(noMatch !== undefined){ %>
             <h3><%= noMatch %></h3>
         <% } %>
     </div>
-    <div id="foundPs">
+    <div id="foundPs" class="row">
         
             <% property.forEach(prop => { %>
             
-                <div>
+                <div class="col-md-4">
                     <a href="/property/<%= prop._id %>">
                     <p><%= prop.city %></p>
                     <p><%= prop.state %></p>
                     <p><%= prop.propertyType %></p>
+                    <img class="img-fluid"src="<%= prop.picture %>" alt="">
                     </a>
                 </div> 
             

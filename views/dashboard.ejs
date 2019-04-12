@@ -1,37 +1,42 @@
 <% include partials/header %>
 
-<div id="dashboard">
+<div id="dashboard" class="jumbotron">
 
-    <div id="subProp">
+    <div id="subProp" class="container">
         <h2>Add A New Property:</h2>
-        <form action="/dashboard" method="POST">
-            <select name="propType" id="propType">
+        <form class="form-group" action="/dashboard" method="POST" enctype="multipart/form-data">
+            <select multiple="" class="form-control" name="propType" id="propType">
                 <option value="House Rental">House Rental</option>
                 <option value="Commerical Rental">Commerical Rental</option>
                 <option value="House for Sale">House for Sale</option>
                 <option value="Commerical Buildings for Sale">Commerical Buildings for Sale</option>
             </select>
-            <input type="text" placeholder="street address"id='streetAdr' name='streetAdr'>
-            <input type="text" placeholder="city" name="city" id="city">
-            <input type="text" placeholder="state" name="state" id="state">
-            <input type="text" placeholder="zip code" name="zip" id="zip">
-            <input type="number" placeholder="bedrooms"id='bedrooms' name='bedrooms'>
-            <input type="number" placeholder="bathrooms"id='bathrooms' name='bathrooms'>
-            <input type="number" placeholder="square footage" name="squareFootage" id="squareFootage">
-            <input type="text" placeholder="price" name="price" id="price">
-            <input type="text" placeholder="agent name" id="agentName" name="agentName">
-            <input type="text" placeholder="phone number" id="phone" name="phone">
-            <input type="email" placeholder="contact email" id="email" name="email"> 
-            <textarea name="" id="" cols="30" rows="10" placeholder="description"></textarea>
-            <button>Submit</button>
+            <label for="picture">Add an image?</label>
+            <input class="form-control-file btn-warning" type="file" id="picture" name="picture">
+            <input class="form-control" type="text" placeholder="street address"id='streetAdr' name='streetAdr'>
+            <input class="form-control" type="text" placeholder="city" name="city" id="city">
+            <input class="form-control" type="text" placeholder="state" name="state" id="state">
+            <input class="form-control" type="text" placeholder="zip code" name="zip" id="zip">
+            <input class="form-control" type="number" placeholder="bedrooms"id='bedrooms' name='bedrooms'>
+            <input class="form-control" type="number" placeholder="bathrooms"id='bathrooms' name='bathrooms'>
+            <input class="form-control" type="number" placeholder="square footage" name="squareFootage" id="squareFootage">
+            <input class="form-control" type="text" placeholder="price" name="price" id="price">
+            <input class="form-control" type="text" placeholder="agent name" id="agentName" name="agentName">
+            <input class="form-control" type="text" placeholder="phone number" id="phone" name="phone">
+            <input class="form-control" type="email" placeholder="contact email" id="email" name="email"> 
+            <textarea class="form-control" name="description" id="" cols="30" rows="10" placeholder="description"></textarea>
+            <button class="btn btn-success">Submit</button>
         </form>    
     </div>
-    <div id="currentProps">
+    <div id="currentProps" class="container">
         <h2>Your Current Properties:</h2>
         <% properties.forEach(prop=> { %>
-            <div class="listed">
-                <p>Property Type: <%= prop.propertyType %></p>
-                <a href="/dashboard/<%= prop._id %>"><%= prop.streetAdr %></a>
+            <div>
+            <ul class="listed list-group"></ul>
+                <li class="list-group-item"><strong>Property Type:</strong> <%= prop.propertyType %></li>
+                <li class="list-group-item"><a href="/dashboard/<%= prop._id %>"><%= prop.streetAdr %></a></li>
+                <li class="list-group-item"><img class="img-fluid" src="<%= prop.picture %>" alt=""></li>
+            </ul>
             </div>
         <%  }) %>
     </div>

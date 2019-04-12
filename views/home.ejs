@@ -1,22 +1,31 @@
 <% include partials/header %>
 
-<h1>Generic RealEstate.com</h1>
-<h2>We have the properties!</h2>
-<div id="homePageDiv">
+<div class="jumbotron text-center" id="homeSplash">
+    <h1>Generic RealEstate.com</h1>
+    <h2>We have the properties!</h2>
+</div>
+<div class="container">
+    <h3 class="text-center">ALL PROPERTIES LISTED</h3>
+    <div id="homePageDiv" class="row">
  
         <% properties.forEach(prop=> { %>
-        <div>
-            <p><strong><%= prop.propertyType %></strong></p>
-            <p><%= prop.streetAdr %></p>
-            <p><%= prop.city %></p>
-            <% if(prop.bedrooms || prop.bathrooms){ %>
-                <p><%= prop.bedrooms %>Beds/<%= prop.bathrooms %>Baths</p>
-            <% } %>
-            <p><%= prop.price %></p>
-            <a href="/property/<%= prop._id %>">Check it out</a>
+   <div class="col-md-4">
+            <div class="card border-info mb-3" style="max-width: 20rem;">
+                <div class="card-header"><%= prop.propertyType %></div>
+                <div class="card-body">
+                    <h4 class="card-title"><%= prop.streetAdr %></h4>
+                    <p class="card-text"><%= prop.city %></p>
+                    <% if(prop.bedrooms || prop.bathrooms){ %>
+                        <p><%= prop.bedrooms %>Beds/<%= prop.bathrooms %>Baths</p>
+                    <% } %>
+                    <p class="card-text"><%= prop.price %></p>
+                    <img class="img-fluid" src="<%= prop.picture %>" alt="">
+                    <a class="btn btn-success" href="/property/<%= prop._id %>">Check it out</a>
+                </div>
+            </div>    
         </div>
-        <%  }) %>
-    
+    <% }) %>
+    </div>
 </div>
 
 <% include partials/footer %>
